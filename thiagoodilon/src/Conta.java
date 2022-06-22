@@ -5,14 +5,6 @@ public class Conta {
     private double saldo;
     private double limite;
 
-    public Conta(Cliente cliente, double limite) {
-        this.id = numContas + 1;
-        this.cliente = cliente;
-        this.limite = -limite;
-        saldo = 0.0;
-        numContas = this.id;
-    }
-
     public Conta(Cliente cliente, double limite, double saldo) {
         this.id = numContas + 1;
         this.cliente = cliente;

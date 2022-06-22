@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Banco {
     Scanner entrada = new Scanner(System.in);
@@ -21,12 +19,10 @@ public class Banco {
         double limite2 = Double.parseDouble(entrada.nextLine());
         tiposConta(nome, cpf, limite, 0);
         tiposConta(nome2, cpf2, limite2, 1);
-        consultarSaldo(conta[0].getid());
-        consultarSaldo(conta[1].getid());
     }
 
     public void tiposConta(String nome, String cpf, double limite, int numConta){
-        System.out.println("Deseja depositar um valor inicial em sua conta?");
+        System.out.println("Deseja depositar um valor inicial na conta do cliente " + nome);
         System.out.println("(1) Sim");
         System.out.println("(2) Não");
         int comando = Integer.parseInt(entrada.nextLine());
@@ -36,58 +32,64 @@ public class Banco {
                 double saldo = Double.parseDouble(entrada.nextLine());
                 Cliente mCliente = new Cliente(nome, cpf);
                 this.conta[numConta] = new Conta(mCliente, limite, saldo);
+                System.out.print("Código de identificação da conta: ");
+                System.out.println(this.conta[numConta].getid());
                 System.out.println("Conta criada com sucesso!\n");
             break;
             case 2:
                 Cliente cliente = new Cliente(nome, cpf);
-                this.conta[numConta] = new Conta(cliente, limite);
+                this.conta[numConta] = new Conta(cliente, limite, 0.0);
+                System.out.print("Código de identificação da conta: ");
+                System.out.println(this.conta[numConta].getid());
                 System.out.println("Conta criada com sucesso!\n");
             break;
             default:
                 System.out.println("Comando Inválido, tente novamente\n");
                 tiposConta(nome, cpf, limite, numConta);
-                break;
+            break;
         }
     }
 
     public void consultarSaldo(int idconta) {
-        if (this.conta != null) {
-            System.out.print("Cliente: ");
-            System.out.println(this.conta[idconta].getNomeCliente());
-            System.out.print("Saldo em conta: R$");
-            System.out.println(this.conta[idconta].getSaldo());
+        idconta -= 1001;
+        System.out.print("Cliente: ");
+        System.out.println(this.conta[idconta].getNomeCliente());
+        System.out.print("Saldo em conta: R$");
+        System.out.println(this.conta[idconta].getSaldo());
+    }
+
+    public void depositar(int idconta) {
+        idconta -= 1001;
+        System.out.println("Qual o valor do depósito?");
+        double valorDepositado = Double.parseDouble(entrada.nextLine());
+        this.conta[idconta].deposito(valorDepositado);
+        System.out.println("Valor depositado com sucesso!\n");
+    }
+
+    public void sacar(int idconta) {
+        idconta -= 1001;
+        System.out.println("Qual o valor a ser sacado?");
+        double valorSacado = Double.parseDouble(entrada.nextLine());
+        if (this.conta[idconta].saque(valorSacado)) {
+            System.out.println("Valor sacado com sucesso! \n");
         } else {
-            System.out.println("A conta ainda não foi criada! \n");
+            System.out.println("Não foi possível realizar o saque, pois esse cliente não tem esse limite disponível\n");
         }
     }
 
-    public void depositar() {
-        if (this.conta != null) {
-            System.out.println("Qual o valor do depósito?");
-            double valorDepositado = Double.parseDouble(entrada.nextLine());
-            this.conta.deposito(valorDepositado);
-            System.out.println("Valor depositado com sucesso!\n");
-        } else {
-            System.out.println("A conta ainda não foi criada!\n");
+    public int digiteId(String acao){
+        System.out.print("Digite o id da conta que você deseja " + acao);
+        int id = Integer.parseInt(entrada.nextLine());
+        while(id < 1001 || id > 1002){
+            System.out.print("Id inválido, digite novamente: ");
+            id = Integer.parseInt(entrada.nextLine());
         }
-    }
-
-    public void sacar() {
-        if (this.conta != null) {
-            System.out.println("Qual o valor a ser sacado?");
-            double valorSacado = Double.parseDouble(entrada.nextLine());
-            if (this.conta.saque(valorSacado)) {
-                System.out.println("Valor sacado com sucesso\n");
-            } else {
-                System.out.println("Não foi possível realizar o saque, porque o cliente você não tem esse limite disponível\n");
-            }
-        } else {
-            System.out.println("A conta ainda não foi criada!\n");
-        }
+        return id;
     }
 
     public void menu() {
         boolean sairMenu = false;
+        System.out.println("Bem vindo ao meu criador de contas bancárias! \n");
         while (!sairMenu) {
             System.out.println("(1) Criar 2 contas");
             System.out.println("(2) Consultar saldo");
@@ -100,13 +102,25 @@ public class Banco {
                     criarConta();
                     break;
                 case 2:
-                    consultarSaldo();
+                    if (this.conta[0] != null) {
+                        consultarSaldo(digiteId("consultar o saldo: "));
+                    } else {
+                        System.out.println("Nenhuma conta foi criada\n");
+                    }
                     break;
                 case 3:
-                    depositar();
+                    if (this.conta[0] != null) {
+                        depositar(digiteId("depositar: "));
+                    } else {
+                        System.out.println("Nenhuma conta foi criada\n");
+                    }
                     break;
                 case 4:
-                    sacar();
+                    if (this.conta[0] != null) {
+                        sacar(digiteId("sacar: "));
+                    } else {
+                        System.out.println("Nenhuma conta foi criada\n");
+                    }
                     break;
                 case 5:
                     sairMenu = true;
