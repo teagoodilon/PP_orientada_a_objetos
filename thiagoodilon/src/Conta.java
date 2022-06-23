@@ -29,7 +29,7 @@ public class Conta {
         return numConta;
     }
 
-    public String getNomeCliente() { // retorna saldo na conta
+    public String getNomeCliente() {
         return this.cliente.getNome();
     }
 

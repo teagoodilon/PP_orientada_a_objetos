@@ -5,22 +5,26 @@ public class Banco {
     private Conta[] conta = new Conta[2];
 
     public void criarConta() {
-        System.out.println("Insira o nome do cliente 1");
-        String nome = entrada.nextLine();
-        System.out.println("Insira o nome do cliente 2");
-        String nome2 = entrada.nextLine();
-        System.out.println("Insira o cpf do cliente " + nome);
-        String cpf = entrada.nextLine();
-        System.out.println("Insira o cpf do cliente " + nome2);
-        String cpf2 = entrada.nextLine();
-        System.out.println("Insira o limite da conta do cliente " + nome);
-        double limite = Double.parseDouble(entrada.nextLine());
-        System.out.println("Insira o limite da conta do cliente " + nome2);
-        double limite2 = Double.parseDouble(entrada.nextLine());
-        tiposConta(nome, cpf, limite, 0);
-        tiposConta(nome2, cpf2, limite2, 1);
+        if(this.conta[0] == null){
+            System.out.println("Insira o nome do cliente 1");
+            String nome = entrada.nextLine();
+            System.out.println("Insira o nome do cliente 2");
+            String nome2 = entrada.nextLine();
+            System.out.println("Insira o cpf do cliente " + nome);
+            String cpf = entrada.nextLine();
+            System.out.println("Insira o cpf do cliente " + nome2);
+            String cpf2 = entrada.nextLine();
+            System.out.println("Insira o limite da conta do cliente " + nome);
+            double limite = Double.parseDouble(entrada.nextLine());
+            System.out.println("Insira o limite da conta do cliente " + nome2);
+            double limite2 = Double.parseDouble(entrada.nextLine());
+            tiposConta(nome, cpf, limite, 0);
+            tiposConta(nome2, cpf2, limite2, 1);
+        } else {
+            System.out.println("As contas já foram criadas, voltando ao menu principal\n");
+        }
     }
-
+    
     public void tiposConta(String nome, String cpf, double limite, int numConta) {
         System.out.println("Deseja depositar um valor inicial na conta do cliente " + nome);
         System.out.println("(1) Sim");
@@ -101,12 +105,10 @@ public class Banco {
                         if (conta[idO].transferencia(conta[idD], valor)) {
                             System.out.println("Transferência realizada com sucesso!\n");
                         } else {
-                            System.out.println(
-                                    "Não é possível realizar essa transferência, a conta ORIGEM não tem esse limite de saldo\n");
+                            System.out.println("Não é possível realizar essa transferência, a conta ORIGEM não tem esse limite de saldo\n");
                         }
                     } else {
-                        System.out.println(
-                                "Não é possível fazer uma transferência, a conta para qual você quer transferir é a mesma\n");
+                        System.out.println("Não é possível fazer uma transferência, a conta para qual você quer transferir é a mesma\n");
                     }
                 } else {
                     System.out.println("Não é possível fazer essa transferência, a conta DESTINO não existe\n");
@@ -165,7 +167,6 @@ public class Banco {
                 default:
                     System.out.println("Comando inválido, tente novamente\n");
                     break;
-
             }
         }
     }
