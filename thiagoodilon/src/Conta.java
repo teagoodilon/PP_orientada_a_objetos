@@ -1,20 +1,24 @@
 public class Conta {
-    static int numContas = 1000;
+    static int numConta = 1000;
     private int id;
     private Cliente cliente;
     private double saldo;
     private double limite;
 
     public Conta(Cliente cliente, double limite, double saldo) {
-        this.id = numContas + 1;
+        this.id = numConta + 1;
         this.cliente = cliente;
         this.limite = -limite;
         this.saldo = saldo;
-        numContas = this.id;
+        numConta = this.id;
     }
 
     public int getid(){
         return id;
+    }
+
+    public int getNum(){
+        return numConta;
     }
 
     public String getNomeCliente() { // retorna saldo na conta
@@ -38,4 +42,12 @@ public class Conta {
         }
     }
 
+    public boolean transferencia(Conta contaDestino, int valor){
+        if(saque(valor)){
+            contaDestino.deposito(valor);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
