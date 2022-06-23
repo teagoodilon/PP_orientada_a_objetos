@@ -1,5 +1,5 @@
 public class Conta {
-    static int numConta = 1000;
+    private static int numConta = 1000;
     private int id;
     private Cliente cliente;
     private double saldo;
@@ -12,6 +12,7 @@ public class Conta {
         this.saldo = saldo;
         numConta = this.id;
     }
+
     public Conta(Cliente cliente, double limite) {
         this.id = numConta + 1;
         this.cliente = cliente;
@@ -20,11 +21,11 @@ public class Conta {
         numConta = this.id;
     }
 
-    public int getid(){
+    public int getid() {
         return id;
     }
 
-    public int getNum(){
+    public int getNum() {
         return numConta;
     }
 
@@ -49,8 +50,8 @@ public class Conta {
         }
     }
 
-    public boolean transferencia(Conta contaDestino, int valor){
-        if(saque(valor)){
+    public boolean transferencia(Conta contaDestino, int valor) {
+        if (saque(valor)) {
             contaDestino.deposito(valor);
             return true;
         } else {

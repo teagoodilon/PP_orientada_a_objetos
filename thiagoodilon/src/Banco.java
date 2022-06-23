@@ -21,12 +21,12 @@ public class Banco {
         tiposConta(nome2, cpf2, limite2, 1);
     }
 
-    public void tiposConta(String nome, String cpf, double limite, int numConta){
+    public void tiposConta(String nome, String cpf, double limite, int numConta) {
         System.out.println("Deseja depositar um valor inicial na conta do cliente " + nome);
         System.out.println("(1) Sim");
         System.out.println("(2) Não");
         int comando = Integer.parseInt(entrada.nextLine());
-        switch(comando){
+        switch (comando) {
             case 1:
                 System.out.println("Insira o saldo inicial da conta:");
                 double saldo = Double.parseDouble(entrada.nextLine());
@@ -42,79 +42,78 @@ public class Banco {
                 System.out.print("Código de identificação da conta: ");
                 System.out.println(this.conta[numConta].getid());
                 System.out.println("Conta criada com sucesso!\n");
-            break;
+                break;
             default:
                 System.out.println("Comando Inválido, tente novamente\n");
                 tiposConta(nome, cpf, limite, numConta);
-            break;
+                break;
         }
     }
 
     public void consultarSaldo(int idconta) {
-        idconta -= 1001;
         System.out.print("Cliente: ");
-        System.out.println(this.conta[idconta].getNomeCliente());
+        System.out.println(this.conta[idconta - 1001].getNomeCliente());
         System.out.print("Saldo em conta: R$");
-        System.out.println(this.conta[idconta].getSaldo());
+        System.out.println(this.conta[idconta - 1001].getSaldo());
         System.out.println();
     }
 
     public void depositar(int idconta) {
-        idconta -= 1001;
         System.out.println("Qual o valor do depósito?");
         double valorDepositado = Double.parseDouble(entrada.nextLine());
-        this.conta[idconta].deposito(valorDepositado);
+        this.conta[idconta - 1001].deposito(valorDepositado);
         System.out.println("Valor depositado com sucesso!\n");
     }
 
     public void sacar(int idconta) {
-        idconta -= 1001;
         System.out.println("Qual o valor a ser sacado?");
         double valorSacado = Double.parseDouble(entrada.nextLine());
-        if (this.conta[idconta].saque(valorSacado)) {
+        if (this.conta[idconta - 1001].saque(valorSacado)) {
             System.out.println("Valor sacado com sucesso! \n");
         } else {
             System.out.println("Não foi possível realizar o saque, pois o cliente não tem esse limite disponível\n");
         }
     }
 
-    public int digiteId(String acao){
+    public int digiteId(String acao) {
         System.out.print("Digite o id da conta que você deseja " + acao);
         int id = Integer.parseInt(entrada.nextLine());
-        while(id < 1001 || id > 1002){
+        while (id < 1001 || id > 1002) {
             System.out.print("Id inválido, digite novamente: ");
             id = Integer.parseInt(entrada.nextLine());
         }
         return id;
     }
 
-    public void transferencia(){
+    public void transferencia() {
         if (this.conta[0] != null) {
             System.out.print("Digite o id da conta ORIGEM que você deseja fazer a transferência: ");
             int idO = Integer.parseInt(entrada.nextLine());
-            if(idO == conta[0].getid() || idO == conta[1].getid()){
+            if (idO == conta[0].getid() || idO == conta[1].getid()) {
                 idO -= 1001;
                 System.out.print("Digite o id da conta DESTINO dessa transferência: ");
                 int idD = Integer.parseInt(entrada.nextLine());
-                if(idD == conta[0].getid() || idD == conta[1].getid()){
+                if (idD == conta[0].getid() || idD == conta[1].getid()) {
                     idD -= 1001;
-                    if(idD != idO){
+                    if (idD != idO) {
                         System.out.print("Digite o valor da transferência: ");
                         int valor = Integer.parseInt(entrada.nextLine());
-                        if(conta[idO].transferencia(conta[idD], valor)){
+                        if (conta[idO].transferencia(conta[idD], valor)) {
                             System.out.println("Transferência realizada com sucesso!\n");
                         } else {
-                            System.out.println("Não é possível realizar essa transferência, a conta ORIGEM não tem esse limite de saldo\n");
+                            System.out.println(
+                                    "Não é possível realizar essa transferência, a conta ORIGEM não tem esse limite de saldo\n");
                         }
                     } else {
-                        System.out.println("Não é possível fazer uma transferência, a conta para qual você quer transferir é a mesma\n");
+                        System.out.println(
+                                "Não é possível fazer uma transferência, a conta para qual você quer transferir é a mesma\n");
                     }
                 } else {
                     System.out.println("Não é possível fazer essa transferência, a conta DESTINO não existe\n");
                 }
             } else {
                 System.out.println("Não é possível fazer essa transferência, a conta ORIGEM não existe\n");
-            }    
+            }
         } else {
             System.out.println("Nenhuma conta foi criada, voltando ao menu principal\n");
         }
@@ -122,7 +121,7 @@ public class Banco {
 
     public void menu() {
         boolean sairMenu = false;
-        System.out.println("\nBem vindo ao meu criador de contas bancárias! \n");
+        System.out.println("\nBem vindo ao meu criador de contas bancárias!\n");
         while (!sairMenu) {
             System.out.println("(1) Criar 2 contas");
             System.out.println("(2) Consultar saldo");
