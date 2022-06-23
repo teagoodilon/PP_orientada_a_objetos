@@ -35,10 +35,10 @@ public class Banco {
                 System.out.print("Código de identificação da conta: ");
                 System.out.println(this.conta[numConta].getid());
                 System.out.println("Conta criada com sucesso!\n");
-            break;
+                break;
             case 2:
                 Cliente cliente = new Cliente(nome, cpf);
-                this.conta[numConta] = new Conta(cliente, limite, 0.0);
+                this.conta[numConta] = new Conta(cliente, limite);
                 System.out.print("Código de identificação da conta: ");
                 System.out.println(this.conta[numConta].getid());
                 System.out.println("Conta criada com sucesso!\n");

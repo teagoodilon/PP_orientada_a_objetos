@@ -12,6 +12,13 @@ public class Conta {
         this.saldo = saldo;
         numConta = this.id;
     }
+    public Conta(Cliente cliente, double limite) {
+        this.id = numConta + 1;
+        this.cliente = cliente;
+        this.limite = -limite;
+        saldo = 0.0;
+        numConta = this.id;
+    }
 
     public int getid(){
         return id;
