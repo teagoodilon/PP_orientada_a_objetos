@@ -6,11 +6,8 @@ public class Conta {
     private double limite;
 
     public Conta(Cliente cliente, double limite, double saldo) {
-        this.id = numConta + 1;
-        this.cliente = cliente;
-        this.limite = -limite;
+        this(cliente, limite);
         this.saldo = saldo;
-        numConta = this.id;
     }
 
     public Conta(Cliente cliente, double limite) {

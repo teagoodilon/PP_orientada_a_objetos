@@ -130,7 +130,9 @@ public class Banco {
             System.out.println("(3) Depositar");
             System.out.println("(4) Sacar");
             System.out.println("(5) Transferência entre contas");
-            System.out.println("(6) Sair");
+            System.out.println("(6) Sair\n");
+            System.out.println("Digite uma opção:");
+
             int comando = Integer.parseInt(entrada.nextLine());
             switch (comando) {
                 case 1:
