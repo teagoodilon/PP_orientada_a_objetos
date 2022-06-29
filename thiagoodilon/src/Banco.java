@@ -69,7 +69,7 @@ public class Banco {
             System.out.print("Saldo em conta: R$");
             System.out.println(conta.getSaldo());
             System.out.println();
-        }
+        } 
     }
 
     public void depositar(Conta conta) {
@@ -129,7 +129,23 @@ public class Banco {
         } else {
             System.out.println("Nenhuma conta foi criada, voltando ao menu principal\n");
         }
+    }
 
+    public void removerConta(Conta conta){
+        if(conta != null){
+            if(conta.getSaldo() == 0){
+                for(int i = 0; i < this.conta.size(); i++){
+                    if(this.conta.get(i).getId() == conta.getId()){
+                        this.conta.remove(i);
+                        System.out.println("Conta removida com sucesso! \n");
+                    }
+                }
+            } else if(conta.getSaldo() > 0){
+                System.out.println("Não é possível cancelar uma conta com saldo disponível\n");
+            } else {
+                System.out.println("Não é possível cancelar uma conta em débito\n");
+            }
+        }        
     }
 
     public void menu() {
@@ -142,7 +158,8 @@ public class Banco {
             System.out.println("(4) Depositar");
             System.out.println("(5) Sacar");
             System.out.println("(6) Transferência entre contas");
-            System.out.println("(7) Sair\n");
+            System.out.println("(7) Remover conta");
+            System.out.println("(8) Sair\n");
             System.out.println("Digite uma opção:");
 
             int comando = Integer.parseInt(entrada.nextLine());
@@ -184,6 +201,15 @@ public class Banco {
                     transferencia();
                     break;
                 case 7:
+                    if (conta.size() > 0) {
+                        System.out.print("Digite o número da conta que você deseja remover: "); 
+                        int id = Integer.parseInt(entrada.nextLine());
+                        removerConta(retornaConta(id));
+                    } else {
+                        System.out.println("Nenhuma conta foi criada, voltando ao menu principal\n");
+                    }
+                    break;
+                case 8:
                     sairMenu = true;
                     System.out.println("Obrigado por usar meu programa!");
                     break;
