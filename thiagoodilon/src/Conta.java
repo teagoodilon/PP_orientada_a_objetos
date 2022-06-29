@@ -18,7 +18,7 @@ public class Conta {
         numConta = this.id;
     }
 
-    public int getid() {
+    public int getId() {
         return id;
     }
 
