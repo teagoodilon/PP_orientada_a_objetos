@@ -48,8 +48,9 @@ public class Banco {
     }
 
     public void listarContas(){
-        System.out.println("Lista de todas as contas: ");
+        
         if(conta.size() > 0){
+            System.out.println("Lista de todas as contas: ");
             for(Conta conta : conta){
                 System.out.print("Número da conta: ");
                 System.out.print(conta.getId());
@@ -86,11 +87,18 @@ public class Banco {
             System.out.println("Qual o valor a ser sacado?");
             double valorSacado = Double.parseDouble(entrada.nextLine());
             if(conta.saque(valorSacado)) {
-                System.out.println("Valor sacado com sucesso! \n");
+                System.out.println("Valor sacado com sucesso!\n");
             } else {
                 System.out.println("Não foi possível realizar o saque, pois o cliente não tem esse limite disponível\n");
             }
         }
+    }
+
+    public int digiteNum(String acao){
+        System.out.print("Digite o número da conta que você deseja " + acao);
+        System.out.print(": ");
+        int id = Integer.parseInt(entrada.nextLine());
+        return id;
     }
 
     public Conta retornaConta(int id) {
@@ -99,7 +107,7 @@ public class Banco {
                 return conta; 
             }
         } 
-        System.out.print("Essa conta não existe, voltando ao menu principal\n\n");
+        System.out.println("Essa conta não existe, voltando ao menu principal\n");
         return null;
     }
 
@@ -137,7 +145,7 @@ public class Banco {
                 for(int i = 0; i < this.conta.size(); i++){
                     if(this.conta.get(i).getId() == conta.getId()){
                         this.conta.remove(i);
-                        System.out.println("Conta removida com sucesso! \n");
+                        System.out.println("Conta removida com sucesso!\n");
                     }
                 }
             } else if(conta.getSaldo() > 0){
@@ -172,27 +180,21 @@ public class Banco {
                     break;    
                 case 3:
                     if (conta.size() > 0) {
-                        System.out.print("Digite o número da conta que você deseja consultar o saldo: "); 
-                        int id = Integer.parseInt(entrada.nextLine());
-                        consultarSaldo(retornaConta(id));
+                        consultarSaldo(retornaConta(digiteNum("consultar o saldo")));
                     } else {
                         System.out.println("Nenhuma conta foi criada, voltando ao menu principal\n");
                     }
                     break;
                 case 4:
                     if (conta.size() > 0) {
-                        System.out.print("Digite o número da conta que você deseja depositar: "); 
-                        int id = Integer.parseInt(entrada.nextLine());
-                        depositar(retornaConta(id));
+                        depositar(retornaConta(digiteNum("depositar")));
                     } else {
                         System.out.println("Nenhuma conta foi criada, voltando ao menu principal\n");
                     }
                     break;
                 case 5:
                     if (conta.size() > 0) {
-                        System.out.print("Digite o número da conta que você deseja sacar: "); 
-                        int id = Integer.parseInt(entrada.nextLine());
-                        sacar(retornaConta(id));  
+                        sacar(retornaConta(digiteNum("sacar")));  
                     } else {
                         System.out.println("Nenhuma conta foi criada, voltando ao menu principal\n");
                     }
@@ -202,9 +204,7 @@ public class Banco {
                     break;
                 case 7:
                     if (conta.size() > 0) {
-                        System.out.print("Digite o número da conta que você deseja remover: "); 
-                        int id = Integer.parseInt(entrada.nextLine());
-                        removerConta(retornaConta(id));
+                        removerConta(retornaConta(digiteNum("remover")));
                     } else {
                         System.out.println("Nenhuma conta foi criada, voltando ao menu principal\n");
                     }
