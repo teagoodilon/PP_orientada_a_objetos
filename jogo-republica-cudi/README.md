@@ -1,7 +1,7 @@
-## Projeto World of Zuul Bad
+## Projeto Républica Cudi
 
-**World of Zuul** é um jogo de aventura muito simples, baseado em texto.
-Este jogo foi criado por Michael Kölling e David J. Barnes, no livro *Programação Orientada a Objetos com Java: Uma Introdução Prática Usando o BlueJ*.
+**República Cudi** é um jogo de aventura muito simples, baseado em texto.
+Este jogo foi feito baseado no World of Zuul, criado por Michael Kölling e David J. Barnes, no livro *Programação Orientada a Objetos com Java: Uma Introdução Prática Usando o BlueJ*.
 
 O código deste projeto foi traduzido e adaptado para uso nas aulas de Programação Orientada a Objetos da UFLA.
 
