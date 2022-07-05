@@ -48,7 +48,6 @@ public class Banco {
     }
 
     public void listarContas(){
-        
         if(conta.size() > 0){
             System.out.println("Lista de todas as contas: ");
             for(Conta conta : conta){
