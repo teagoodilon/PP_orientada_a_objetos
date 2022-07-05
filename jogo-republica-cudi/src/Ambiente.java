@@ -51,6 +51,12 @@ public class Ambiente {
     /**
      * @return A descrição do ambiente.
      */
+    public String getDescricaoLonga() {
+        String desc = "Voce esta " + descricao;
+        desc += "\nSaidas: " + getSaidas();
+        return desc;
+    }
+
     public String getDescricao() {
         return descricao;
     }

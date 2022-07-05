@@ -2,28 +2,34 @@ import java.util.Scanner;
 
 /**
  * Esta classe é parte da aplicacao "World of Zuul".
- * "World of Zuul" é um jogo de aventura muito simples, baseado em texto.  
+ * "World of Zuul" é um jogo de aventura muito simples, baseado em texto.
  * 
- * Esse analisador lê a entrada do usuario e tenta interpretá-la como um comando "Adventure". 
- * Cada vez que é chamado, ele lê uma linha do terminal e tenta interpretar a linha como um 
- * comando de duas palavras. Ele retorna o comando como um objeto da classe Comando.
+ * Esse analisador lê a entrada do usuario e tenta interpretá-la como um comando
+ * "Adventure".
+ * Cada vez que é chamado, ele lê uma linha do terminal e tenta interpretar a
+ * linha como um
+ * comando de duas palavras. Ele retorna o comando como um objeto da classe
+ * Comando.
  *
- * O analisador tem um conjunto de palavras de comando conhecidas. Ele compara a entrada do 
- * usuário com os comandos conhecidos, e se a entrada não é um dos comandos conhecidos, ele 
+ * O analisador tem um conjunto de palavras de comando conhecidas. Ele compara a
+ * entrada do
+ * usuário com os comandos conhecidos, e se a entrada não é um dos comandos
+ * conhecidos, ele
  * retorna um objeto comando que é marcado como um comando desconhecido.
  * 
- * @author  Michael Kölling and David J. Barnes (traduzido e adaptado por Julio César Alves)
+ * @author Michael Kölling and David J. Barnes (traduzido e adaptado por Julio
+ *         César Alves)
  */
-public class Analisador  {
+public class Analisador {
     // guarda todas as palavras de comando validas
-    private PalavrasComando palavrasDeComando;  
+    private PalavrasComando palavrasDeComando;
     // origem da entrada de comandos
-    private Scanner entrada;         
+    private Scanner entrada;
 
     /**
      * Cria um analisador para ler do terminal.
      */
-    public Analisador()  {
+    public Analisador() {
         palavrasDeComando = new PalavrasComando();
         entrada = new Scanner(System.in);
     }
@@ -31,7 +37,7 @@ public class Analisador  {
     /**
      * @return O próximo comando do usuario
      */
-    public Comando pegarComando()  {
+    public Comando pegarComando() {
         // guardará uma linha inteira
         String linha;
         // guardará até duas palavras usadas no comando
@@ -44,8 +50,10 @@ public class Analisador  {
         // obtém uma linha de comando do usuário
         linha = entrada.nextLine();
 
-        // quebra o comando do usuário em várias palavras, usando espaços em branco como separadores. 
-        // Exemplo: se ele digitar "ir norte", o comando vai gerar um vetor com as duas palavras ["ir", "norte"].
+        // quebra o comando do usuário em várias palavras, usando espaços em branco como
+        // separadores.
+        // Exemplo: se ele digitar "ir norte", o comando vai gerar um vetor com as duas
+        // palavras ["ir", "norte"].
         String[] palavras = linha.trim().split("\\s+");
 
         // guarda a primeira e a segunda palavras digitadas pelo usuário, se houverem.
@@ -58,11 +66,14 @@ public class Analisador  {
 
         // Agora verifica se esta palavra é conhecida. Se for, cria um comando com ela.
         // Se não, cria um comando "null" (para comando desconhecido)
-        if(palavrasDeComando.ehComando(palavra1)) {
+        if (palavrasDeComando.ehComando(palavra1)) {
             return new Comando(palavra1, palavra2);
+        } else {
+            return new Comando(null, palavra2);
         }
-        else {
-            return new Comando(null, palavra2); 
-        }
+    }
+
+    public String getPalavras() {
+        return palavrasDeComando.getComandosValidos();
     }
 }

@@ -36,21 +36,29 @@ public class Jogo {
      * Cria todos os ambientes e liga as saidas deles
      */
     private void criarAmbientes() {
-        Ambiente quintal, cozinha, quartoCaputo, sala, quartoDioguinho;
+        Ambiente quintal, cozinha, quartoCaputo, salaDoSofa, sala, quartoDioguinho, sotao;
 
         // cria os ambientes
         quintal = new Ambiente("em um espaço aberto e bom pra conversar com o amigo gomes da costa, o quintal");
         cozinha = new Ambiente("na cozinha da república, a mais limpa de lavras");
         quartoCaputo = new Ambiente("no quarto do caputo, que tem cheiro de uuuuuui");
         sala = new Ambiente("na sala do sem risadola, local favorito dos moradores");
-        quartoDioguinho = new Ambiente("no quarto do diguinho, não deite na cama dele ");
+        salaDoSofa = new Ambiente("na sala do sofá, local onde lucas malachias deixou sua marca");
+        quartoDioguinho = new Ambiente("no quarto do dioguinho, não deite na cama dele ");
+        sotao = new Ambiente("no sotão da casa, eles se recusam a limpar a caixa d'agua e bebem agua suja");
 
         // inicializa as saidas dos ambientes
         quintal.ajustarSaida("leste", cozinha);
-        cozinha.ajustarSaida("norte", sala);
+        quintal.ajustarSaida("norte", quartoCaputo);
+        quintal.ajustarSaida("cima", sotao);
+        sotao.ajustarSaida("baixo", quintal);
+        cozinha.ajustarSaida("leste", salaDoSofa);
+        cozinha.ajustarSaida("sul", quintal);
         quartoCaputo.ajustarSaida("sul", quintal);
-        sala.ajustarSaida("sul", quartoDioguinho);
-        quartoDioguinho.ajustarSaida("norte", sala);
+        salaDoSofa.ajustarSaida("oeste", sala);
+        salaDoSofa.ajustarSaida("sul", cozinha);
+        sala.ajustarSaida("oeste", quartoDioguinho);
+        quartoDioguinho.ajustarSaida("sul", sala);
 
         ambienteAtual = quintal; // o jogo comeca em frente à quintal
     }
@@ -107,9 +115,19 @@ public class Jogo {
             irParaAmbiente(comando);
         } else if (palavraDeComando.equals("sair")) {
             querSair = sair(comando);
+        } else if (palavraDeComando.equals("observar")) {
+            observar(comando);
         }
 
         return querSair;
+    }
+
+    private void observar(Comando comando) {
+        if (comando.temSegundaPalavra()) {
+            System.out.println("Observar o que?");
+        } else {
+            exibirLocAtual();
+        }
     }
 
     /**
@@ -121,7 +139,7 @@ public class Jogo {
         System.out.println("você vê a muié andando pela casa.");
         System.out.println();
         System.out.println("Suas palavras de comando sao:");
-        System.out.println("   ir sair ajuda");
+        System.out.println("   " + analisador.getPalavrasValidas());
     }
 
     /**
@@ -149,10 +167,7 @@ public class Jogo {
     }
 
     private void exibirLocAtual() {
-        System.out.println("Voce esta " + ambienteAtual.getDescricao());
-
-        System.out.print("Saidas: " + ambienteAtual.getSaidas());
-        System.out.println();
+        System.out.println(ambienteAtual.getDescricaoLonga());
     }
 
     /**
