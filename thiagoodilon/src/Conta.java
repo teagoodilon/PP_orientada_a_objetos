@@ -6,11 +6,8 @@ public class Conta {
     private double limite;
 
     public Conta(Cliente cliente, double limite, double saldo) {
-        this.id = numConta + 1;
-        this.cliente = cliente;
-        this.limite = -limite;
+        this(cliente, limite);
         this.saldo = saldo;
-        numConta = this.id;
     }
 
     public Conta(Cliente cliente, double limite) {
@@ -21,7 +18,7 @@ public class Conta {
         numConta = this.id;
     }
 
-    public int getid() {
+    public int getId() {
         return id;
     }
 
@@ -29,7 +26,7 @@ public class Conta {
         return numConta;
     }
 
-    public String getNomeCliente() { // retorna saldo na conta
+    public String getNomeCliente() {
         return this.cliente.getNome();
     }
 
