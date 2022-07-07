@@ -73,7 +73,7 @@ public class Analisador {
         }
     }
 
-    public String getPalavras() {
+    public String getPalavrasValidas() {
         return palavrasDeComando.getComandosValidos();
     }
 }

@@ -24,6 +24,7 @@ public class Ambiente {
     private String descricao;
     // ambientes visinhos de acordo com a direção
     private HashMap<String, Ambiente> saidas;
+    private Item item;
 
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele não tem saidas.
@@ -34,6 +35,12 @@ public class Ambiente {
     public Ambiente(String descricao) {
         this.descricao = descricao;
         saidas = new HashMap<String, Ambiente>();
+        this.item = null;
+    }
+
+    public Ambiente(String descricaoItem, Item item) {
+        this(descricaoItem);
+        this.item = item;
     }
 
     public void ajustarSaida(String direcao, Ambiente ambiente) {
@@ -53,6 +60,11 @@ public class Ambiente {
      */
     public String getDescricaoLonga() {
         String desc = "Voce esta " + descricao;
+        if(temItem()){
+            desc += "\nVocê encontrou uma " + item.getNome() + ", " + item.getDesc();
+        } else {
+            desc += "\nNão há nada aqui";
+        }
         desc += "\nSaidas: " + getSaidas();
         return desc;
     }
@@ -63,6 +75,14 @@ public class Ambiente {
 
     public Ambiente getAmbiente(String direcao) {
         return saidas.get(direcao);
+    }
+
+    public boolean temItem(){
+        if(item != null){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

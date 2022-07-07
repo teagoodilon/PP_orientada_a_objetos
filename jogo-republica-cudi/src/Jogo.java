@@ -41,7 +41,8 @@ public class Jogo {
         // cria os ambientes
         quintal = new Ambiente("em um espaço aberto e bom pra conversar com o amigo gomes da costa, o quintal");
         cozinha = new Ambiente("na cozinha da república, a mais limpa de lavras");
-        quartoCaputo = new Ambiente("no quarto do caputo, que tem cheiro de uuuuuui");
+        Item espada = new Item("espada", 2, "afiada como uma folha de papel a4");
+        quartoCaputo = new Ambiente("no quarto do caputo, que tem cheiro de uuuuuui", espada);
         sala = new Ambiente("na sala do sem risadola, local favorito dos moradores");
         salaDoSofa = new Ambiente("na sala do sofá, local onde lucas malachias deixou sua marca");
         quartoDioguinho = new Ambiente("no quarto do dioguinho, não deite na cama dele ");
