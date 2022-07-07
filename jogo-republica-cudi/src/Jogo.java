@@ -39,26 +39,29 @@ public class Jogo {
         Ambiente quintal, cozinha, quartoCaputo, salaDoSofa, sala, quartoDioguinho, sotao;
 
         // cria os ambientes
-        quintal = new Ambiente("em um espaço aberto e bom pra conversar com o amigo gomes da costa, o quintal");
-        cozinha = new Ambiente("na cozinha da república, a mais limpa de lavras");
-        Item espada = new Item("espada", 2, "afiada como uma folha de papel a4");
-        quartoCaputo = new Ambiente("no quarto do caputo, que tem cheiro de uuuuuui", espada);
-        sala = new Ambiente("na sala do sem risadola, local favorito dos moradores");
-        salaDoSofa = new Ambiente("na sala do sofá, local onde lucas malachias deixou sua marca");
-        quartoDioguinho = new Ambiente("no quarto do dioguinho, não deite na cama dele ");
-        sotao = new Ambiente("no sotão da casa, eles se recusam a limpar a caixa d'agua e bebem agua suja");
+        quintal = new Ambiente("quintal","em um espaço aberto e bom pra conversar com o amigo gomes da costa");
+        Item pratoEltinho = new Item("prato eltinho", 4, "prato que o eltinho sujou via wi-fi");
+        cozinha = new Ambiente("cozinha","da república, a mais limpa de lavras", pratoEltinho);
+        Item leiteAzedo = new Item("leite azedo", 2, "esse leite venceu em 2019 e o caputo insiste em tomar");
+        quartoCaputo = new Ambiente("quarto do caputo","que tem cheiro de uuuuuui", leiteAzedo);
+        sala = new Ambiente("sala","do sem risadola, local favorito dos moradores");
+        salaDoSofa = new Ambiente("sala do sofa",", local onde lucas malachias deixou sua marca");
+        Item vape = new Item("vape", 1, "esse trem faz mal");
+        quartoDioguinho = new Ambiente("quarto do dioguinho",", não deite na cama dele", vape);
+        sotao = new Ambiente("sotao","eles se recusam a limpar a caixa d'agua e bebem agua suja");
 
         // inicializa as saidas dos ambientes
-        quintal.ajustarSaida("leste", cozinha);
+        quintal.ajustarSaida("oeste", cozinha);
         quintal.ajustarSaida("norte", quartoCaputo);
         quintal.ajustarSaida("cima", sotao);
         sotao.ajustarSaida("baixo", quintal);
-        cozinha.ajustarSaida("leste", salaDoSofa);
-        cozinha.ajustarSaida("sul", quintal);
+        cozinha.ajustarSaida("sul", salaDoSofa);
+        cozinha.ajustarSaida("leste", quintal);
         quartoCaputo.ajustarSaida("sul", quintal);
         salaDoSofa.ajustarSaida("oeste", sala);
-        salaDoSofa.ajustarSaida("sul", cozinha);
-        sala.ajustarSaida("oeste", quartoDioguinho);
+        salaDoSofa.ajustarSaida("norte", cozinha);
+        sala.ajustarSaida("norte", quartoDioguinho);
+        sala.ajustarSaida("leste", salaDoSofa);
         quartoDioguinho.ajustarSaida("sul", sala);
 
         ambienteAtual = quintal; // o jogo comeca em frente à quintal
@@ -92,7 +95,7 @@ public class Jogo {
         System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
         System.out.println();
 
-        exibirLocAtual();
+        exibirLocal();
     }
 
     /**
@@ -127,7 +130,7 @@ public class Jogo {
         if (comando.temSegundaPalavra()) {
             System.out.println("Observar o que?");
         } else {
-            exibirLocAtual();
+            exibirDescLocal();
         }
     }
 
@@ -163,12 +166,16 @@ public class Jogo {
             System.out.println("Não há passagem!");
         } else {
             ambienteAtual = proximoAmbiente;
-            exibirLocAtual();
+            exibirLocal();
         }
     }
 
-    private void exibirLocAtual() {
+    private void exibirDescLocal() {
         System.out.println(ambienteAtual.getDescricaoLonga());
+    }
+
+    private void exibirLocal(){
+        System.out.println(ambienteAtual.getNome());
     }
 
     /**

@@ -1,4 +1,3 @@
-
 /**
  * Classe Ambiente - um ambiente em um jogo adventure.
  *
@@ -21,6 +20,7 @@ import java.util.HashMap;
 
 public class Ambiente {
     // descrição do ambiente
+    private String nome;
     private String descricao;
     // ambientes visinhos de acordo com a direção
     private HashMap<String, Ambiente> saidas;
@@ -32,14 +32,15 @@ public class Ambiente {
      * 
      * @param descricao A descrição do ambiente.
      */
-    public Ambiente(String descricao) {
+    public Ambiente(String nome, String descricao) {
+        this.nome = nome;
         this.descricao = descricao;
         saidas = new HashMap<String, Ambiente>();
         this.item = null;
     }
 
-    public Ambiente(String descricaoItem, Item item) {
-        this(descricaoItem);
+    public Ambiente(String nome, String descricao, Item item) {
+        this(nome, descricao);
         this.item = item;
     }
 
@@ -59,12 +60,8 @@ public class Ambiente {
      * @return A descrição do ambiente.
      */
     public String getDescricaoLonga() {
-        String desc = "Voce esta " + descricao;
-        if(temItem()){
-            desc += "\nVocê encontrou uma " + item.getNome() + ", " + item.getDesc();
-        } else {
-            desc += "\nNão há nada aqui";
-        }
+        String desc = "Voce esta em " + nome + " " + descricao;
+        desc += temItem() ? "\nVocê encontrou uma " + item.getNome() + ", " + item.getDesc() : "\nNão há nada aqui";
         desc += "\nSaidas: " + getSaidas();
         return desc;
     }
@@ -73,16 +70,19 @@ public class Ambiente {
         return descricao;
     }
 
+    public String getNome(){
+        String nomeAmbiente = "Voce esta em "  + nome;
+        nomeAmbiente += "\nSaidas: " + getSaidas();
+        return nomeAmbiente;
+    }
+
     public Ambiente getAmbiente(String direcao) {
         return saidas.get(direcao);
     }
 
     public boolean temItem(){
-        if(item != null){
-            return true;
-        } else {
-            return false;
-        }
+        boolean resultado = item != null ? true : false;
+        return resultado;
     }
 
 }
