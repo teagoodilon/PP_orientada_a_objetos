@@ -19,7 +19,7 @@
 import java.util.HashMap;
 
 public class Ambiente {
-    // descrição do ambiente
+    // descrição e nome do ambiente
     private String nome;
     private String descricao;
     // ambientes visinhos de acordo com a direção
@@ -61,7 +61,7 @@ public class Ambiente {
      */
     public String getDescricaoLonga() {
         String desc = "Voce esta em " + nome + " " + descricao;
-        desc += temItem() ? "\nVocê encontrou uma " + item.getNome() + ", " + item.getDesc() : "\nNão há nada aqui";
+        desc += temItem() ? "\nVocê encontrou um " + item.getNome() + ", " + item.getDesc() : "\nNão há nada aqui";
         desc += "\nSaidas: " + getSaidas();
         return desc;
     }
@@ -85,4 +85,21 @@ public class Ambiente {
         return resultado;
     }
 
+    public String getNomeItem(){
+        return item.getNome();
+    }
+
+    public Item retornaItem(){
+        if(item != null){
+            return item;
+        } else {
+            return null;
+        }
+    }
+
+    public Item pegarItem(){
+        Item copiaItem = item;
+        item = null;
+        return copiaItem;
+    }
 }

@@ -39,10 +39,10 @@ public class Jogo {
         Ambiente quintal, cozinha, quartoCaputo, salaDoSofa, sala, quartoDioguinho, sotao;
 
         // cria os ambientes
-        quintal = new Ambiente("quintal","em um espaço aberto e bom pra conversar com o amigo gomes da costa");
-        Item pratoEltinho = new Item("prato eltinho", 4, "prato que o eltinho sujou via wi-fi");
+        quintal = new Ambiente("quintal","um espaço aberto e bom pra conversar com o amigo gomes da costa");
+        Item pratoEltinho = new Item("prato", 4, "prato que o eltinho sujou via wi-fi");
         cozinha = new Ambiente("cozinha","da república, a mais limpa de lavras", pratoEltinho);
-        Item leiteAzedo = new Item("leite azedo", 2, "esse leite venceu em 2019 e o caputo insiste em tomar");
+        Item leiteAzedo = new Item("leite", 2, "esse leite venceu em 2019 e o caputo insiste em tomar");
         quartoCaputo = new Ambiente("quarto do caputo","que tem cheiro de uuuuuui", leiteAzedo);
         sala = new Ambiente("sala","do sem risadola, local favorito dos moradores");
         salaDoSofa = new Ambiente("sala do sofa",", local onde lucas malachias deixou sua marca");
@@ -121,8 +121,9 @@ public class Jogo {
             querSair = sair(comando);
         } else if (palavraDeComando.equals("observar")) {
             observar(comando);
+        } else if (palavraDeComando.equals("pegar")) {
+            pegar(comando);
         }
-
         return querSair;
     }
 
@@ -134,13 +135,35 @@ public class Jogo {
         }
     }
 
+    private void pegar(Comando comando) {
+        if (!comando.temSegundaPalavra()) {
+            System.out.println("Pegar o que?");
+            return;
+        }
+
+        String item = comando.getSegundaPalavra();
+        
+        if(ambienteAtual.temItem()){
+            if(item.equals(ambienteAtual.getNomeItem())){
+                System.out.println("O item " + ambienteAtual.getNomeItem() + " foi coletado");
+                ambienteAtual.pegarItem();
+            } else {
+                System.out.println("Não há esse item aqui");
+            }
+        } else {
+            System.out.println("Não há itens aqui");
+        }
+    }
+
+
+
     /**
      * Exibe informações de ajuda.
      * Aqui nós imprimimos algo bobo e enigmático e a lista de palavras de comando
      */
     private void imprimirAjuda() {
-        System.out.println("Voce esta perdido," + ambienteAtual.getDescricao());
-        System.out.println("você vê a muié andando pela casa.");
+        System.out.println("Você esta perdido," + ambienteAtual.getDescricao());
+        System.out.println("Você vê a muié andando pela casa.");
         System.out.println();
         System.out.println("Suas palavras de comando sao:");
         System.out.println("   " + analisador.getPalavrasValidas());
