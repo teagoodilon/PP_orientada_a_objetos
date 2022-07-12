@@ -45,16 +45,16 @@ public class Jogo {
         Ambiente quintal, cozinha, quartoCaputo, salaDoSofa, sala, quartoDioguinho, sotao;
 
         // cria os ambientes
-        quintal = new Ambiente("quintal","um espaço aberto e bom pra conversar com o amigo gomes da costa");
-        Item pratoEltinho = new Item("prato", 4, "prato que o eltinho sujou via wi-fi");
-        cozinha = new Ambiente("cozinha","da república, a mais limpa de lavras", pratoEltinho);
-        Item leiteAzedo = new Item("leite", 2, "esse leite venceu em 2019 e o caputo insiste em tomar");
-        quartoCaputo = new Ambiente("quarto do caputo","que tem cheiro de uuuuuui", leiteAzedo);
-        sala = new Ambiente("sala","do sem risadola, local favorito dos moradores");
-        salaDoSofa = new Ambiente("sala do sofa",", local onde lucas malachias deixou sua marca");
+        quintal = new Ambiente("quintal", "um espaço aberto e bom pra conversar com o amigo gomes da costa");
+        Item prato = new Item("prato", 4, "prato que o eltinho sujou via wi-fi");
+        cozinha = new Ambiente("cozinha", "da república, a mais limpa de lavras", prato);
+        Item leite = new Item("leite", 2, "esse leite venceu em 2019 e o caputo insiste em tomar");
+        quartoCaputo = new Ambiente("quarto do caputo", "que tem cheiro de uuuuuui", leite);
+        sala = new Ambiente("sala", "do sem risadola, local favorito dos moradores");
+        salaDoSofa = new Ambiente("sala do sofa", ", local onde lucas malachias deixou sua marca");
         Item vape = new Item("vape", 1, "esse trem faz mal");
-        quartoDioguinho = new Ambiente("quarto do dioguinho",", não deite na cama dele", vape);
-        sotao = new Ambiente("sotao","eles se recusam a limpar a caixa d'agua e bebem agua suja");
+        quartoDioguinho = new Ambiente("quarto do dioguinho", ", não deite na cama dele", vape);
+        sotao = new Ambiente("sotao", "eles se recusam a limpar a caixa d'agua e bebem agua suja");
 
         // inicializa as saidas dos ambientes
         quintal.ajustarSaida("oeste", cozinha);
@@ -154,9 +154,9 @@ public class Jogo {
         }
 
         String item = comando.getSegundaPalavra();
-        
-        if(ambienteAtual.temItem()){
-            if(item.equals(ambienteAtual.getNomeItem())){
+
+        if (ambienteAtual.temItem()) {
+            if (item.equals(ambienteAtual.getNomeItem())) {
                 System.out.println("O item " + ambienteAtual.getNomeItem() + " foi coletado");
                 morador.adicionaItem(ambienteAtual.pegarItem());
             } else {
@@ -166,8 +166,6 @@ public class Jogo {
             System.out.println("Não há itens aqui");
         }
     }
-
-
 
     /**
      * Exibe informações de ajuda.
@@ -209,7 +207,7 @@ public class Jogo {
         System.out.println(ambienteAtual.getDescricaoLonga());
     }
 
-    private void exibirLocal(){
+    private void exibirLocal() {
         System.out.println(ambienteAtual.getNome());
     }
 
