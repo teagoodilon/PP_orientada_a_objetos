@@ -23,13 +23,19 @@ public class Jogo {
     private Analisador analisador;
     // ambiente onde se encontra o jogador
     private Ambiente ambienteAtual;
+    private Morador morador;
 
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
     public Jogo() {
+        criarJogador();
         criarAmbientes();
         analisador = new Analisador();
+    }
+
+    private void criarJogador(){
+        morador = new Morador("Vitor");
     }
 
     /**
@@ -132,6 +138,12 @@ public class Jogo {
             System.out.println("Observar o que?");
         } else {
             exibirDescLocal();
+            if(morador.retornaItens().equals("")){
+                System.out.print("Você não possui nenhum item\n");
+            } else {
+                System.out.print("Seus itens: ");
+                System.out.println(morador.retornaItens());
+            }
         }
     }
 
@@ -146,7 +158,7 @@ public class Jogo {
         if(ambienteAtual.temItem()){
             if(item.equals(ambienteAtual.getNomeItem())){
                 System.out.println("O item " + ambienteAtual.getNomeItem() + " foi coletado");
-                ambienteAtual.pegarItem();
+                morador.adicionaItem(ambienteAtual.pegarItem());
             } else {
                 System.out.println("Não há esse item aqui");
             }
