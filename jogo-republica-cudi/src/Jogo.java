@@ -139,7 +139,7 @@ public class Jogo {
         } else {
             exibirDescLocal();
             if(morador.retornaItens().equals("")){
-                System.out.print("Você não possui nenhum item\n");
+                System.out.print("Você não possui itens\n");
             } else {
                 System.out.print("Seus itens: ");
                 System.out.println(morador.retornaItens());
